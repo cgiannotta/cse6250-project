@@ -1,0 +1,7 @@
+our_embeddings/
+their_embeddings/
+data/
+*.h5
+*.dict
+w2v.txt
+word2vec_50d.txt

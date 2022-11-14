@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Our Embeddings",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["data/annotated_preproc_input2.csv","w2v.txt","--batchsize", "32"]
+        },
+        {
+            "name": "Python: Their Embeddings",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["data/annotated_preproc_input2.csv","word2vec_50d.txt","--batchsize", "32"]
+        }
+    ]
+}
