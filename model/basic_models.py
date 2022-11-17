@@ -14,10 +14,12 @@ import os
 import sklearn
 import sklearn.multiclass
 import sklearn.svm
-import sklearn.cross_validation
+from sklearn.model_selection import cross_validate
+# import sklearn.cross_validation
 import sklearn.linear_model
 import sklearn.naive_bayes
-import sklearn.externals.joblib
+from sklearn.ensemble import RandomForestClassifier
+# import sklearn.externals.joblib
 import sklearn.metrics
 import sklearn.feature_extraction.text
 from nltk.tokenize import TreebankWordTokenizer
@@ -70,8 +72,9 @@ def extract_features(X, val_X, test_X, max_ngram_size=2):
 
 def make_predictions(X, Y, val_X, val_Y, test_X, test_Y, s):
     # classifier = sklearn.svm.LinearSVC(n_jobs=2)
-    classifier = sklearn.linear_model.LogisticRegression(n_jobs=2)
+    # classifier = sklearn.linear_model.LogisticRegression(n_jobs=2)
     # classifier = sklearn.naive_bayes.GaussianNB()
+    classifier = RandomForestClassifier()
     # classifier = sklearn.svm.SVC(probability=True) # hard to scale to dataset with more than a couple of 10000 samples.
 
     total_data = X.shape[0]
@@ -139,9 +142,9 @@ def main():
             X_features, val_X_features, test_X_features = extract_features(train_x, valid_x, test_x, args.ngram)
         else:
             print('Skipping Build of Ngrams: model already exists.')
-            X_features = dict(np.load(os.path.join("converted", "X_features-"+str(args.ngram)+".npz")))['features'].item()
-            val_X_features = dict(np.load(os.path.join("converted", "val_X_features-"+str(args.ngram)+".npz")))['features'].item()
-            test_X_features = dict(np.load(os.path.join("converted", "test_X_features-"+str(args.ngram)+".npz")))['features'].item()
+            X_features = dict(np.load(os.path.join("converted", "X_features-"+str(args.ngram)+".npz"), allow_pickle=True))['features'].item()
+            val_X_features = dict(np.load(os.path.join("converted", "val_X_features-"+str(args.ngram)+".npz"), allow_pickle=True))['features'].item()
+            test_X_features = dict(np.load(os.path.join("converted", "test_X_features-"+str(args.ngram)+".npz"), allow_pickle=True))['features'].item()
 
 
 
