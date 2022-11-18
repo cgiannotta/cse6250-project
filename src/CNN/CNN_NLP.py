@@ -68,37 +68,36 @@ class CNN_NLP(nn.Module):
             logits (torch.Tensor): Output logits with shape (batch_size,
                 n_classes)
         """
-        print('input_ids shape (batch, max_length): ', input_ids.shape)
-        print('meow')
+        #print('input_ids shape (batch, max_length): ', input_ids.shape)
 
         # Get embeddings from `input_ids`. Output shape: (b, max_len, embed_dim)
         x_embed = self.embedding(input_ids).float()
-        print('x_embed shape (batch, max_length, embed_dim): ', x_embed.shape)
+        #print('x_embed shape (batch, max_length, embed_dim): ', x_embed.shape)
 
         # Permute `x_embed` to match input shape requirement of `nn.Conv1d`.
         # Output shape: (b, embed_dim, max_len)
         x_reshaped = x_embed.permute(0, 2, 1)
-        print('x_reshaped shape (batch, embed_dim, max_len): ', x_reshaped.shape)
+        #print('x_reshaped shape (batch, embed_dim, max_len): ', x_reshaped.shape)
 
         # Apply CNN and ReLU. Output shape: (b, num_filters[i], L_out)
         x_conv1d_2 = F.relu(self.conv1d_2(x_reshaped))
-        print('x_conv1d_2 shape (b, num_filters[i], L_out): ', x_conv1d_2.shape)
+        #print('x_conv1d_2 shape (b, num_filters[i], L_out): ', x_conv1d_2.shape)
         x_conv1d_3 = F.relu(self.conv1d_3(x_reshaped))
-        print('x_conv1d_3 shape (b, num_filters[i], L_out): ', x_conv1d_3.shape)
+        #print('x_conv1d_3 shape (b, num_filters[i], L_out): ', x_conv1d_3.shape)
         x_conv1d_4 = F.relu(self.conv1d_4(x_reshaped))
-        print('x_conv1d_4 shape (b, num_filters[i], L_out): ', x_conv1d_4.shape)
+        #print('x_conv1d_4 shape (b, num_filters[i], L_out): ', x_conv1d_4.shape)
         x_conv1d_5 = F.relu(self.conv1d_5(x_reshaped))
-        print('x_conv1d_5 shape (b, num_filters[i], L_out): ', x_conv1d_5.shape)
+        #print('x_conv1d_5 shape (b, num_filters[i], L_out): ', x_conv1d_5.shape)
 
         # Max pooling. Output shape: (b, num_filters[i], 1)
         x_pool_2 = F.max_pool1d(x_conv1d_2, kernel_size=x_conv1d_2.shape[2])
-        print('x_pool_2 shape (b, num_filters[i], 1): ', x_pool_2.shape)
+        #print('x_pool_2 shape (b, num_filters[i], 1): ', x_pool_2.shape)
         x_pool_3 = F.max_pool1d(x_conv1d_3, kernel_size=x_conv1d_3.shape[2])
-        print('x_pool_3 shape (b, num_filters[i], 1): ', x_pool_3.shape)
+        #print('x_pool_3 shape (b, num_filters[i], 1): ', x_pool_3.shape)
         x_pool_4 = F.max_pool1d(x_conv1d_4, kernel_size=x_conv1d_4.shape[2])
-        print('x_pool_4 shape (b, num_filters[i], 1): ', x_pool_4.shape)
+        #print('x_pool_4 shape (b, num_filters[i], 1): ', x_pool_4.shape)
         x_pool_5 = F.max_pool1d(x_conv1d_5, kernel_size=x_conv1d_5.shape[2])
-        print('x_pool_5 shape (b, num_filters[i], 1): ', x_pool_5.shape)
+        #print('x_pool_5 shape (b, num_filters[i], 1): ', x_pool_5.shape)
         
         # Concatenate x_pool_list to feed the fully connected layer.
         # Output shape: (b, sum(num_filters))
@@ -108,10 +107,10 @@ class CNN_NLP(nn.Module):
         x_fc5 = x_pool_5.squeeze(dim=2)
 
         x_fc = torch.cat([x_fc2, x_fc3, x_fc4, x_fc5], dim=1)
-        print('x_fc shape (b, sum(num_filters)): ', x_fc.shape)
+        #print('x_fc shape (b, sum(num_filters)): ', x_fc.shape)
         
         # Compute logits. Output shape: (b, n_classes)
         logits = self.fc(self.dropout(x_fc))
-        print('logits shape (batch, n_classes): ', logits.shape)
+        #print('logits shape (batch, n_classes): ', logits.shape)
 
         return logits
