@@ -5,27 +5,27 @@
 This repository holds code for the final course project for Georgia Tech’s CSE6250 course (Big Data for Health Informatics). The project is meant to replicate the analysis from the paper Comparing Deep Learning and Concept Extraction Based Methods for Patient Phenotyping from Clinical Narratives, by Gehrmann at al.
 
 ## Folder Structure and File Descriptions
-/data_load
-    JoinAnnotationAndNotes.ipynb
-    annotations.csv
-    cg_eda.ipynb
-    cg_w2v.ipynb
-/model - deprecated folder
-/src 
-    /CNN
-        CNN.ipynb - Notebook that calls below files and runs the modeling pipeline. 
-        CNN_NLP.py - PyTorch model class
-        data_load.py - Torch Dataset implementation
-        run_model.py - Model instantiate, train, and evaluate
-    /phenotype
-.gitignore
-README.md
-environment.yml - Run this file to configure the environment for running the code locally
+1. /data_load
+    1. JoinAnnotationAndNotes.ipynb
+    2. annotations.csv
+    3. cg_eda.ipynb
+    4. cg_w2v.ipynb
+2. /model - deprecated folder
+3. /src 
+    1. /CNN
+        1. CNN.ipynb - Notebook that calls below files and runs the modeling pipeline. 
+        2. CNN_NLP.py - PyTorch model class
+        3. data_load.py - Torch Dataset implementation
+        4. run_model.py - Model instantiate, train, and evaluate
+    2. /phenotype - This reposes the code provided by the original authors, Gehrmann et al.
+4. .gitignore
+5. README.md
+6. environment.yml - Run this file to configure the environment for running the code locally
 
 ## Data-preprocess - How to install and run:
 1. Download MIMIC-III data and join with annotations from authors. Alternatively, you can download their word2vec embeddings here.
 2. Download our annotations.csv file and run:
-     python preprocess.py data/annotations.csv w2v.txt. 
+     <code>python preprocess.py data/annotations.csv w2v.txt.</code>
 This outputs two h5 files, one with data split into batches and one without batches. 
 
 ## Models
