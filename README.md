@@ -4,9 +4,31 @@
 
 This repository holds code for the final course project for Georgia Tech’s CSE6250 course (Big Data for Health Informatics). The project is meant to replicate the analysis from the paper Comparing Deep Learning and Concept Extraction Based Methods for Patient Phenotyping from Clinical Narratives, by Gehrmann at al.
 
-## How to install and run:
+## Folder Structure and File Descriptions
+/data_load
+    JoinAnnotationAndNotes.ipynb
+    annotations.csv
+    cg_eda.ipynb
+    cg_w2v.ipynb
+/model - deprecated folder
+/src 
+    /CNN
+        CNN.ipynb - Notebook that calls below files and runs the modeling pipeline. 
+        CNN_NLP.py - PyTorch model class
+        data_load.py - Torch Dataset implementation
+        run_model.py - Model instantiate, train, and evaluate
+    /phenotype
+.gitignore
+README.md
+environment.yml - Run this file to configure the environment for running the code locally
+
+## Data-preprocess - How to install and run:
 1. Download MIMIC-III data and join with annotations from authors. Alternatively, you can download their word2vec embeddings here.
-2. Download our annotations.csv file (add link) and run python preprocess.py data/annotations.csv w2v.txt. This outputs two h5 files, one with data split into batches and one without batches. 
+2. Download our annotations.csv file and run:
+     python preprocess.py data/annotations.csv w2v.txt. 
+This outputs two h5 files, one with data split into batches and one without batches. 
+
+## Models
 
 ### Basic Models
 3. Run python basic_models.py --data data-nobatch.h5 --ngram 5 to get baseline performance. You can uncomment the classifier lines (74-76) in basic_models.py to specify which type of basic model (Logistic, Naive Bayes, or SVM) you wish to run.
@@ -17,9 +39,8 @@ This repository holds code for the final course project for Georgia Tech’s CSE
 6. In the Experiment section of the notebook, the sweeps config can be modified to change parameter values. In Wandb, a sweep allows you to run multiple experiments with a randomized set of configurations from a pre-defined sweep configuration. 
 
 ## How to use
-
 This methodology could be used to analyze a variety of text data, though the more similar it is to the MIMIC discharge summaries the more likely the model is to give similar output.
 
 ## Credits
-
-References and credits for the work in this repository can be found in our final report here (add link).
+References and credits for the work in this repository can be found in our final report here:
+https://gatech.box.com/s/ywlsubm6o0bm6z3jnz0gehqc3ab7mbtj
