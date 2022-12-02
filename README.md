@@ -31,7 +31,7 @@ This outputs two h5 files, one with data split into batches and one without batc
 ## Models
 
 ### Basic Models
-3. Run python basic_models.py --data data-nobatch.h5 --ngram 5 to get baseline performance. You can uncomment the classifier lines (74-76) in basic_models.py to specify which type of basic model (Logistic, Naive Bayes, or SVM) you wish to run.
+3. Run <code>python basic_models.py --data data-nobatch.h5 --ngram 5</code> to get baseline performance. You can uncomment the classifier lines (74-76) in basic_models.py to specify which type of basic model (Logistic, Naive Bayes, or SVM) you wish to run.
 
 ### CNN Model
 4. Open up the CNN.ipynb notebook in Google Colab to run the CNN experiments, it may be necessary to update the system path locations in the Setup section of the notebook. 
